@@ -8,9 +8,11 @@ export const ContactList = () => {
   const filter = useSelector(getFilter);
 
   const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
+    contact.name.includes(filter)
   );
-
+  // const filteredContacts = contacts.filter(contact =>
+  //   contact.name.toLowerCase().includes(filter.toLowerCase())
+  // );
   if (filteredContacts) {
     return (
       <List>
@@ -20,4 +22,12 @@ export const ContactList = () => {
       </List>
     );
   }
+
+  // return (
+  //   <List>
+  //     {contacts.map(contact => {
+  //       return <ContactItem key={contact.id} {...contact} />;
+  //     })}
+  //   </List>
+  // );
 };

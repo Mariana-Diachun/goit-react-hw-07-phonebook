@@ -30,23 +30,26 @@ const contactsSlice = createSlice({
     [addContact.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.contacts.push(action.payload);
+      state.contacts.push({
+        id: nanoid(),
+        number: action.payload.number,
+        name: action.payload.name,
+      });
     },
     [addContact.rejected]: handleRejected,
     [deleteContact.pending]: handlePending,
     [deleteContact.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      const index = state.contacts.findIndex(
-        contact => contact.id === action.payload.id
+      state.contacts = state.contacts.filter(
+        contact => contact.id !== action.payload.id
       );
-      state.contacts.splice(index, 1);
     },
     [deleteContact.rejected]: handleRejected,
   },
 });
 
-export const ContactsReducer = contactsSlice.reducer;
+export const contactsReducer = contactsSlice.reducer;
 
 // const contactsSlice = createSlice({
 //   name: 'contacts',

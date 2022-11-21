@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import schema from 'validation/validation';
 import Notiflix from 'notiflix';
 import { nanoid } from 'nanoid';
-import { addContact } from 'redux/contactsSlice';
+import { addContact } from 'redux/operations';
 import {
   MainTitle,
   Input,
@@ -22,15 +22,15 @@ export const ContactForm = () => {
 
   const contacts = useSelector(getContacts);
 
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = ({ name, number }, { resetForm }) => {
     const hasContact = contacts.find(
-      contact => contact.name.toLowerCase() === values.name.toLowerCase()
+      contact => contact.name.toLowerCase() === name.toLowerCase()
     );
 
     if (hasContact)
-      return Notiflix.Notify.failure(`${values.name} is already in contacts`);
+      return Notiflix.Notify.failure(`${name} is already in contacts`);
 
-    dispatch(addContact(values));
+    dispatch(addContact({ name, number }));
 
     resetForm({ name: '', number: '' });
   };
