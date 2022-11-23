@@ -7,14 +7,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getError, getIsLoading } from 'redux/selectors';
 import { fetchContacts } from 'redux/operations';
 import { useEffect } from 'react';
+import { getContacts } from 'redux/selectors';
 
 export const App = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(fetchContacts(contacts));
   }, [dispatch]);
 
   return (
