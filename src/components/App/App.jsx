@@ -16,7 +16,7 @@ export const App = () => {
   const error = useSelector(getError);
 
   useEffect(() => {
-    dispatch(fetchContacts(contacts));
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   return (
