@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Formik } from 'formik';
-import schema from 'validation/validation';
-import Notiflix from 'notiflix';
 import { nanoid } from 'nanoid';
+import { Formik } from 'formik';
+import Notiflix from 'notiflix';
+
+import schema from 'validation/validation';
+
 import { addContact } from 'redux/operations';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 
 import {
   MainTitle,
@@ -21,7 +23,7 @@ export const ContactForm = () => {
 
   const dispatch = useDispatch();
 
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const handleSubmit = ({ name, phone }, { resetForm }) => {
     const hasContact = contacts.find(
@@ -36,29 +38,27 @@ export const ContactForm = () => {
   };
 
   return (
-    <header>
-      <section>
-        <MainTitle>Phonebook</MainTitle>
-        <Formik
-          initialValues={{ name: '', phone: '' }}
-          validationSchema={schema}
-          onSubmit={handleSubmit}
-        >
-          <FormWrap autoComplete="off">
-            <Label htmlFor={nameId}>
-              Name
-              <Input type="text" name="name" id={nameId} />
-            </Label>
-            <Alert name="name" compononet="span" />
-            <Label htmlFor={phoneId}>
-              Phone number
-              <Input type="tel" name="phone" id={phoneId} />
-            </Label>
-            <Alert name="phone" compononet="span" />
-            <Button type="submit">Add contact</Button>
-          </FormWrap>
-        </Formik>
-      </section>
-    </header>
+    <section>
+      <MainTitle>Phonebook</MainTitle>
+      <Formik
+        initialValues={{ name: '', phone: '' }}
+        validationSchema={schema}
+        onSubmit={handleSubmit}
+      >
+        <FormWrap autoComplete="off">
+          <Label htmlFor={nameId}>
+            Name
+            <Input type="text" name="name" id={nameId} />
+          </Label>
+          <Alert name="name" compononet="span" />
+          <Label htmlFor={phoneId}>
+            Phone number
+            <Input type="tel" name="phone" id={phoneId} />
+          </Label>
+          <Alert name="phone" compononet="span" />
+          <Button type="submit">Add contact</Button>
+        </FormWrap>
+      </Formik>
+    </section>
   );
 };

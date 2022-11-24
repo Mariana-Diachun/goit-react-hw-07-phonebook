@@ -10,7 +10,7 @@ const schema = yup.object().shape({
     .min(2, 'Name is too short!')
     .max(30, 'Name is too long!')
     .required('Please, enter your name!'),
-  number: yup
+  phone: yup
     .string()
     .matches(
       /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,

@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
+
 import { searchByName } from 'redux/filterSlice';
+import { selectFilter } from 'redux/selectors';
+
 import { Box, Label, InputSearch } from 'components/Filter/Filter.styled';
-import { getFilter } from 'redux/selectors';
 
 export const Filter = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(getFilter);
+  const filter = useSelector(selectFilter);
   const inputID = nanoid();
 
   return (
